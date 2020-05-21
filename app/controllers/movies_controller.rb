@@ -1,5 +1,9 @@
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.all
+   if params[:query].present?
+     @results = PgSearch.multisearch(params[:query])
+   else
+     @results = Movie.all
+   end
   end
 end

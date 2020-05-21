@@ -1,1 +1,8 @@
-// Specific CSS for your home-page
+.text-blue-bold {
+  color: $main-blue;
+  font-weight: bold;
+}
+.underline-blue {
+  text-decoration: underline;
+  text-decoration-color: $main-blue;
+}

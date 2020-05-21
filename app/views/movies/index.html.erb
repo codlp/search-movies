@@ -1,10 +1,32 @@
 <div class="container">
+  <h1 class="text-center mt-4">Search movies</h1>
+
+  <%= form_tag movies_path, method: :get, class: "movies-search-form" do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: "Find a movie"
+    %>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="container">
   <div class="row">
     <div class="col-sm-8 offset-sm-2">
-      <div id="movies">
-        <% @movies.each do |movie| %>
-          <h4><%= movie.title %></h4>
-          <p><%= movie.syllabus %></p>
+        <div id="movies">
+        <% @results.each do |result| %>
+          <% if result.searchable_type == "Movie" %>
+            <% movie = result.searchable %>
+            <h4 class="text-blue-bold"><%= movie.title %></h4>
+            <p><span class="underline-blue">Syllabus:</span> <%= movie.syllabus %></p>
+            <p><span class="underline-blue">Director:</span> <%= movie.director.first_name %></p>
+          <% else %>
+            <% serie = result.searchable %>
+              <h4 class="text-blue-bold"><%= serie.title %></h4>
+              <p><span class="underline-blue">Syllabus:</span> <%= serie.syllabus %></p>
+              <p><span class="underline-blue">Year:</span> <%= serie.year %></p>
+          <% end %>
         <% end %>
       </div>
     </div>

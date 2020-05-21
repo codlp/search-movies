@@ -5,7 +5,7 @@ file = "https://gist.githubusercontent.com/ssaunier/25920c896baa0e4495fd/raw/9c2
 sample = YAML.load(open(file).read)
 
 puts 'Creating directors...'
-directors = {}  # slug => Director
+directors = {}
 sample["directors"].each do |director|
   directors[director["slug"]] = Director.create! director.slice("first_name", "last_name")
 end
